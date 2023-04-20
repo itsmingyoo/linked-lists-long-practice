@@ -93,16 +93,16 @@ class SinglyLinkedList {
         if (!this.head) return;
 
         // Should console.log the values of the nodes in the linked list in order from head to tail
-        if (this.head) {// if there's a head execute the while loop inside
-            let curr = this.head; // DO NOT USE CONST;
-            //stores the current head
+        // if there's a head execute the while loop inside
+        let curr = this.head; // DO NOT USE CONST;
+        //stores the current head
 
-            //traverse the linkedlist
-            while (curr) {//while there is still a current value aka if the next value isn't null that is stored into here, then continue the loop; if curr.next is null then is saved as curr; the loop will end
-                console.log(curr.value) // curr.value is the value that we're outputting before we change it to the next one
-                curr = curr.next; //change curr value to the next;
-            }
+        //traverse the linkedlist
+        while (curr) {//while there is still a current value aka if the next value isn't null that is stored into here, then continue the loop; if curr.next is null then is saved as curr; the loop will end
+            console.log(curr.value) // curr.value is the value that we're outputting before we change it to the next one
+            curr = curr.next; //change curr value to the next;
         }
+
         return;
         // Write your hypothesis on the time complexity of this method here
         //O(n)

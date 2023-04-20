@@ -15,14 +15,16 @@ class DoublyLinkedList {
     }
 
     addToHead(val) {
+        // console.log('this      ======', this);
         // There are bugs in this method! Fix them!!!
 
         // Add node of val to head of linked list
         let newNode = new DoublyLinkedNode(val);
 
         if (this.length >= 1) {
-            this.head.prev = newNode;
             newNode.next = this.head;
+            this.head.prev = newNode;
+            
             this.head = newNode;
         } else {
             this.head = newNode;
@@ -37,9 +39,13 @@ class DoublyLinkedList {
     addToTail(val) {
         // Add node of val to tail of linked list
         let newNode = new DoublyLinkedNode(val);
+
         if (this.length >= 1) {
-            this.tail.next = newNode;
+            //pointers
             newNode.prev = this.tail;
+            this.tail.next = newNode;
+
+            //reassign the tail value to the new node
             this.tail = newNode;
 
         } else {
@@ -55,39 +61,72 @@ class DoublyLinkedList {
     }
 
     removeFromHead() {
-        // Remove node at head
-        if (!this.head) return undefined;
+        if (!this.head) return undefined; // if no head, return undefined
 
-        const curryHead = this.head;
+        //locate the head
+        const curryHead = this.head; // this.head is the head
+        const curryHeadVal = this.head.value;
 
-        this.head = this.head.next;
+        //non-empty list
+        if (curryHead.next) {//if theres a next value, set the current head pointer to the next node
+            this.head = this.head.next;//sets new head value to the next
+            this.head.prev = null;//sets prev value to null
+            this.length--; //decrement
+        } else {//dumbass make an else statement in case there is only 1 item
+            this.head = null;
+            this.length--; //decrement
+        }
 
-        this.length--;
-        return curryHead.value;
+        return curryHeadVal; //return the removed head's value
 
         // Write your hypothesis on the time complexity of this method here
     }
 
     removeFromTail() {
-        // Remove node at tail
+        if (!this.length) return undefined; // first check
+        const valueofTail = this.tail.value;
+        // Should remove the tail node from the list and return the node's value
+        // const currTail = this.tail; //this doesn't work, must set the below code this.tail = this.tail.prev outside the conditional first
+        this.tail = this.tail.prev;//set this.tail to point to the prev (left)
 
-        // Your code here
+        // Should set the NEXT POINTER on the new tail to be null
+        if (this.tail) {//if prev exists
+            this.tail.next = null; //delete tail
+        }
+
+        //dont need this commented code below, it was ptsd from removefromhead
+        // } else {//if no prev value, then set to null
+        //     this.tail.next = null;//delete tail
+        // }
+
+        // Should update the length for a non-empty list
+        this.length--;
+
+        //return value
+        return valueofTail;
+
+
+
+
 
         // Write your hypothesis on the time complexity of this method here
     }
 
     peekAtHead() {
-        // Return value of head node
-
-        // Your code here
+        if (!this.length) return undefined;
+        if (this.head) {
+            return this.head.value;
+        }
 
         // Write your hypothesis on the time complexity of this method here
     }
 
     peekAtTail() {
-        // Return value of tail node
+        if (!this.length) return undefined;
 
-        // Your code here
+        if (this.tail) {
+            return this.tail.value;
+        }
 
         // Write your hypothesis on the time complexity of this method here
     }
